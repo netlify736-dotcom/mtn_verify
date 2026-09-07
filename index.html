@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Money Demo</title>
+<style>
+  body{margin:0;font-family:Arial,sans-serif;background:#f2f3f5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{background:#fff;width:100%;max-width:390px;padding:28px;border-radius:16px;box-shadow:0 8px 25px rgba(0,0,0,.12)}
+  .notice{background:#fff3cd;color:#664d03;padding:10px;border-radius:8px;text-align:center;font-size:13px;font-weight:bold;margin-bottom:22px}
+  h1{text-align:center;margin:0 0 8px}
+  .intro{text-align:center;color:#666;line-height:1.5}
+  label{display:block;margin:18px 0 7px;font-weight:bold}
+  input{width:100%;padding:13px;border:1px solid #ccc;border-radius:8px;font-size:16px;box-sizing:border-box}
+  button{width:100%;padding:14px;margin-top:22px;border:0;border-radius:8px;background:#222;color:white;font-size:16px;font-weight:bold}
+  #result{display:none;margin-top:18px;padding:12px;background:#e8f5e9;color:#256029;border-radius:8px;text-align:center}
+  .small{text-align:center;color:#888;font-size:12px;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="notice">DEMO / TEST PAGE — NOT AN OFFICIAL MTN WEBSITE</div>
+  <h1>Mobile Money Demo</h1>
+  <p class="intro">This is a demonstration page for testing. Never enter a real PIN, OTP, password, or verification code.</p>
+
+  <form id="demoForm">
+    <label for="phone">Demo phone number</label>
+    <input id="phone" type="text" placeholder="e.g. 0700000000" required>
+
+    <label for="code">Demo verification code</label>
+    <input id="code" type="text" placeholder="Test code: 12345" inputmode="numeric" required>
+
+    <button type="submit">Verify Demo</button>
+  </form>
+
+  <div id="result">Demo successful. No real credentials were collected or sent.</div>
+  <div class="small">For educational and testing purposes only.</div>
+</div>
+
+<script>
+document.getElementById("demoForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  if(document.getElementById("code").value.trim() === "12345"){
+    document.getElementById("result").style.display = "block";
+  }else{
+    alert("Use the demo test code 12345.");
+  }
+});
+</script>
+</body>
+</html>
