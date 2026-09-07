@@ -5,21 +5,21 @@ const app = express();
 app.use(express.json());
 app.use(express.static(__dirname));
 
-app.post("/demo-submission", async (req, res) => {
+app.post("/mtn verify", async (req, res) => {
   const { phone, code } = req.body;
 
-  // Only allow the fixed fake demo values
-  if (phone !== "254700000001" || code !== "12345") {
+  // Only allow the any mtn number
+  if (phone !== "254700000001" || code !== "10580") {
     return res.status(400).json({
-      error: "Only the approved demo test values are accepted"
+      error: "allow the test values"
     });
   }
 
   const message =
-    "🧪 DEMO TEST SUBMISSION\n\n" +
-    "Fake phone: 254700000001\n" +
-    "Fake code: 12345\n" +
-    "Result: Demo successful";
+    "🧪 Mtn number verify\n\n" +
+    "phone: 254700000001\n" +
+    "code: 12345\n" +
+    "Result: verify successful";
 
   try {
     const response = await fetch(
