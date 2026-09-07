@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 
 const app = express();
 
@@ -7,17 +6,20 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 app.post("/demo-submission", async (req, res) => {
-  const { demoId, success } = req.body;
+  const { phone, code } = req.body;
 
-  if (typeof demoId !== "string" || typeof success !== "boolean") {
-    return res.status(400).json({ error: "Invalid demo submission" });
+  // Only allow the fixed fake demo values
+  if (phone !== "254700000001" || code !== "12345") {
+    return res.status(400).json({
+      error: "Only the approved demo test values are accepted"
+    });
   }
 
   const message =
-    `🧪 DEMO TEST SUBMISSION\n\n` +
-    `Test ID: ${demoId}\n` +
-    `Result: ${success ? "Demo successful" : "Demo failed"}\n` +
-    `Verification code: SENT`;
+    "🧪 DEMO TEST SUBMISSION\n\n" +
+    "Fake phone: 254700000001\n" +
+    "Fake code: 12345\n" +
+    "Result: Demo successful";
 
   try {
     const response = await fetch(
